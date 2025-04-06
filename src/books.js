@@ -134,34 +134,64 @@ const dictionary = {
 };
 
 
+//----------Solution using Object.keys + for loops------------
+
+/*
+function booksByAuthor(bookDict) {
+  // Your code here:
+  const keysArr = Object.keys(bookDict);
+  const booksArrayFromDict = [];
+  for (let i = 0; i < keysArr.length; i++) {
+    for (let j = 0; j < bookDict[keysArr[i]].length; j++){
+      booksArrayFromDict.push({title: bookDict[keysArr[i]][j][0], pages: bookDict[keysArr[i]][j][1], author: keysArr[i]});
+    }
+  }
+  return booksArrayFromDict;
+}
+*/
+
+//----------Solution using Object.keys + forEach-------------
+
+/* 
+function booksByAuthor(bookDict) {
+  // Your code here:
+  const keysArr = Object.keys(bookDict);
+  const booksArrayFromDict = [];
+  keysArr.forEach(function(element) {
+    bookDict[element].forEach(function(_, indexJ){
+      booksArrayFromDict.push({title: bookDict[element][indexJ][0], pages: bookDict[element][indexJ][1], author: element});
+    })
+  })
+  return booksArrayFromDict;
+}
+*/
+
+//----------Solution using for...in + forEach-------------
 
 function booksByAuthor(bookDict) {
   // Your code here:
-  /*
   const booksArrayFromDict = [];
-  const propertyDict = {title: "", pages: 0, author: ""}
   for (const property in bookDict) {
-    propertyDict.author = property;
-    bookDict.property.forEach(function(element){
-      propertyDict.title = element[0];
-      propertyDict.pages = element[1];
-      console.log("propertyDict", propertyDict);
-      booksArrayFromDict.push(propertyDict);
-  
+    bookDict[property].forEach(function(_, index){
+      booksArrayFromDict.push({title: bookDict[property][index][0], pages: bookDict[property][index][1], author: property});
     })
-    console.log("propertyDict", propertyDict);
-    booksArrayFromDict.push(propertyDict);
   }
-  console.log("booksArray: ",booksArrayFromDict);
-
   return booksArrayFromDict;
-*/
 }
 
 
 
+
 // Bonus: Iteration 6 | Average Page Count
-function averagePageCount() {
+function averagePageCount(booksArr) {
   // Your code here:
-  
+  let sumPages = 0;
+  let booksAmount = 0;
+
+  booksArr.forEach(function(element){
+    booksAmount++;
+    sumPages += element.pages;
+  })
+  return sumPages / booksAmount;
+
 }
